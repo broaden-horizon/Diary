@@ -6,6 +6,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Sunflower', sans-serif;
+	border: 2px solid red;
 }
 
 body {
@@ -88,6 +89,9 @@ body {
   100% { top:25px; opacity: 0;}
 }
 
+
+
+
 .branch_arrow i {
 	font-size: 3rem;
     position: absolute;
@@ -99,4 +103,14 @@ body {
     animation-delay: 0s;
     animation-iteration-count: infinite;
     animation-play-state: running;
+}
+
+
+.target_ {
+	display: block;
+	position: fixed;
+	width: 80px;
+	height: 80px;
+	margin: 0;
+	padding: 0;	
 }

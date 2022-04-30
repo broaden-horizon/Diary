@@ -1,6 +1,9 @@
 //dom
 const butterfly = document.querySelector(".butterfly");
 const back = document.querySelector("body");
+const arrow = document.querySelector(".branch_arrow");
+const target = document.querySelector(".target");
+const target_ = document.querySelector(".target_");
 //variables
 
 let mouse_x = 0;
@@ -8,6 +11,10 @@ let mouse_y = 0;
 
 let img_x = 0;
 let img_y = 0;
+
+let dest_x = 0;
+let dest_y = 0;
+
 //functions
 
 
@@ -36,8 +43,27 @@ function move() {
 	butterfly.style.left = (img_x + ((mouse_x - img_x)/25)) + 'px';
 	butterfly.style.top = (img_y + ((mouse_y - img_y)/25)) + 'px';
 	
+	console.log('mouse:', mouse_x, mouse_y);
+	checkDestination();
 }
 
+
+function checkDestination() {
+	//목표 이미지 좌표 지정(아래 좌표에서 가로 80px 세로 80p씩)
+	dest_x = arrow.getBoundingClientRect().left + 175 - 20;
+	dest_y = arrow.getBoundingClientRect().top + 65 - 20;
+	
+	//목표 좌표 visualize
+	target_.style.left = dest_x - 20 + 'px';
+	target_.style.top = dest_y - 20 + "px";
+	
+	if(img_x >= dest_x && img_x <= dest_x + 80) {
+		if(img_y >= dest_y && img_y <= dest_y + 80) {
+			//오늘 기록 페이지로 이
+		}
+	}
+	
+}
 //eventlisteners
 document.addEventListener("mousemove", (e) => {
 	mouse_x = e.pageX;
