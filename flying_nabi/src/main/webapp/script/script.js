@@ -1,6 +1,6 @@
 //dom
 const butterfly = document.querySelector(".butterfly");
-
+const back = document.querySelector("body");
 //variables
 
 let mouse_x = 0;
@@ -13,7 +13,7 @@ let img_y = 0;
 
 function init() {
 	//브라우저에 따라 다른 이미지의 위치를 지정
-	butterfly.style.left = butterfly.getBoundingClientRect().left + 'px';
+	butterfly.style.left = '50px';
 	butterfly.style.top = butterfly.getBoundingClientRect().top + 'px';
 	
 	img_x = butterfly.getBoundingClientRect().left;
@@ -22,6 +22,9 @@ function init() {
 	//초기 마우스 위치 이미지 위치로 지정 
 	mouse_x = butterfly.getBoundingClientRect().left;
 	mouse_y = butterfly.getBoundingClientRect().top;
+	
+	//페이지로딩하며화면 전환
+	back.style.backgroundColor = 'white';
 }
 
 function move() {
@@ -45,5 +48,5 @@ document.addEventListener("mousemove", (e) => {
 
 
 init();
-setInterval(move, 50);
+setTimeout(() => {setInterval(move, 50)}, 2500); 
 //setInterval(check, 2000);
