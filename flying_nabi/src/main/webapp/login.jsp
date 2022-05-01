@@ -20,11 +20,11 @@
 		<div class='loginTitle'><h2>로그인</h2></div>
 		<form method="post" action="loginAction.jsp">
 			<div class="form-floating mb-3">
-			  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+			  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userEmail">
 			  <label for="floatingInput">이메일</label>
 			</div>
 			<div class="form-floating">
-			  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+			  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPW">
 			  <label for="floatingPassword">패스워드</label>
 			</div>
 			<input class="submit btn btn-outline-secondary" type="submit" value="로그인">
@@ -35,16 +35,16 @@
 
 <!-- 회원가입 화면 -->
 
-<div class="joinbox position-absolute top-50 start-50 translate-middle">
+<div class="joinbox d-none position-absolute top-50 start-50 translate-middle">
 	<div class="join">
 		<div class='joinTitle'><h2>회원가입</h2></div>
-		<form method="post" action="loginAction.jsp">
+		<form method="post" action="joinAction.jsp">
 			<div class="form-floating mb-3">
-			  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+			  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userEamil">
 			  <label for="floatingInput">아이디</label>
 			</div>
 			<div class="form-floating mb-3">
-			  <input type="password" class="pw form-control" id="floatingPassword" placeholder="Password">
+			  <input type="password" class="pw form-control" id="floatingPassword" placeholder="Password" name="userPW">
 			  <label for="floatingPassword">비밀번호</label>
 			</div>
 			<div class="form-floating">

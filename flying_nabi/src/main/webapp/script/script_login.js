@@ -29,10 +29,13 @@ function unfoldJoin() {
 	arrow.style.left = 0;
 	arrow.style.marginLeft= "10px";
 	arrow.style.fontSize = '130%';
-	
-	//요소들 에니메이션 
+	joinBox.classList.toggle("d-none");
+
+	setTimeout(() => {
+		//요소들 에니메이션 
 	join.style.width = '350px';
-	join.style.opacity = 1;
+	join.style.opacity = 1;		
+	}, 0);	
 	
 	isFold = false;
 	console.log("isfold: ", isFold);
@@ -42,14 +45,18 @@ function unfoldJoin() {
 function foldJoin() {
 	//조인 화면 줄이
 	joinPageBtn.style.width = 25 + 'px';
-	arrow.style.transform = "rotate( -180deg )";	
+	arrow.style.transform = "rotate( 360deg )";	
 	arrow.style.left = 0;
 	arrow.style.marginLeft= "0px";
 	arrow.style.fontSize = '100%';
 	
-	//요소들 에니메이션 
 	join.style.width = '10px';
 	join.style.opacity = 0;
+	
+	setTimeout(() => {
+		//joinBox 사라
+	joinBox.classList.toggle("d-none");		
+	}, 500);
 	
 	isFold = true;
 }
