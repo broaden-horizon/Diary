@@ -1,8 +1,7 @@
 //dom
 const butterfly = document.querySelector(".butterfly");
-const back = document.querySelector("body");
+const cover = document.querySelector(".cover");
 const arrow = document.querySelector(".branch_arrow");
-const target = document.querySelector(".target");
 const target_ = document.querySelector(".target_");
 //variables
 
@@ -14,6 +13,8 @@ let img_y = 0;
 
 let dest_x = 0;
 let dest_y = 0;
+
+let move_interval = null;
 
 //functions
 
@@ -31,7 +32,10 @@ function init() {
 	mouse_y = butterfly.getBoundingClientRect().top;
 	
 	//페이지로딩하며화면 전환
-	back.style.backgroundColor = 'white';
+	cover.style.opacity = 0;
+	setTimeout(() => {
+		cover.style.diplay = 'none';
+	}, 2500);
 }
 
 function move() {
@@ -57,9 +61,17 @@ function checkDestination() {
 	target_.style.left = dest_x - 20 + 'px';
 	target_.style.top = dest_y - 20 + "px";
 	
+	
+	//목표 좌표 도착 확
 	if(img_x >= dest_x && img_x <= dest_x + 80) {
 		if(img_y >= dest_y && img_y <= dest_y + 80) {
-			//오늘 기록 페이지로 이
+			clearInterval(move_interval);
+			//fade-out
+			cover.style.display = 'block';
+			cover.style.opacity = 1;
+			
+			//로그인 페이지로 이동
+			setTimeout(() => {location.href = "./login.jsp"}, 2500);
 		}
 	}
 	
@@ -73,6 +85,8 @@ document.addEventListener("mousemove", (e) => {
 
 
 
+
 init();
-setTimeout(() => {setInterval(move, 50)}, 2500); 
-//setInterval(check, 2000);
+setTimeout(() => {
+	move_interval = setInterval(move, 50);
+}, 2500); 
