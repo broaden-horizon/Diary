@@ -15,11 +15,11 @@ public class UserDAO {
 			String dbURL = "jdbc:mysql://localhost:3306/FLYING";
 			String dbID = "root";
 			String dbPW = "12345678";
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 			
 		} catch (Exception e) {
-			e.printStackTrace();// TODO: handle exceptio
+			e.printStackTrace();
 		}
 	}
 	
@@ -38,9 +38,24 @@ public class UserDAO {
 			}
 			return -1; //일치하는 아이디가 없음 
 		} catch (Exception e) {
-			e.printStackTrace();// TODO: handle exception
+			e.printStackTrace();
 		}
 		return -2; //데이터 베이스 오류
+	}
+	
+	public int join(User user) {
+		String SQL = "INSERT INTO USER VALUES (?, ?)";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user.getUserEmail());
+			pstmt.setString(2, user.getUserPW());
+			System.out.println(pstmt);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -2; // 데이터베이스 오
+		
 	}
 
 

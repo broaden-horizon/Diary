@@ -40,16 +40,16 @@
 		<div class='joinTitle'><h2>회원가입</h2></div>
 		<form method="post" action="joinAction.jsp">
 			<div class="form-floating mb-3">
-			  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userEamil">
+			  <input type="email" class="form-control email" placeholder="name@example.com" name="userEmail">
 			  <label for="floatingInput">아이디</label>
 			</div>
 			<div class="form-floating mb-3">
-			  <input type="password" class="pw form-control" id="floatingPassword" placeholder="Password" name="userPW">
+			  <input type="password" class="pw form-control" placeholder="Password" name="userPW">
 			  <label for="floatingPassword">비밀번호</label>
 			</div>
 			<div class="form-floating">
-			  <input type="password" class="pw_ch form-control" id="floatingPassword" placeholder="Password">
-			  <label for="floatingPassword">비밀번호 확인</label>
+			  <input type="password" class="pw_ch form-control" placeholder="Password">
+			  <label for="floatingPassword_ch">비밀번호 확인</label>
 			</div>
 			<input class="joinBtn submit btn btn-outline-secondary" type="submit" value="회원가입">
 		</form>

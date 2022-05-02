@@ -5,11 +5,12 @@ const arrow = document.querySelector(".arrow");
 const join = document.querySelector(".join");
 const joinBox = document.querySelector(".joinbox");
 const joinTitle = document.querySelector(".joinTitle");
+const emailBox = document.querySelector(".email");
+const pwBox = document.querySelector(".pw");
+const pw_chBox = document.querySelector(".pw_ch");
+const joinBtn = document.querySelector(".joinBtn");
 
 let isFold = true;
-pwBox = document.querySelector(".pw");
-pw_chBox = document.querySelector(".pw_ch");
-joinBtn = document.querySelector(".joinBtn");
 
 //functions 
 function init() {
@@ -87,13 +88,21 @@ pwBox.addEventListener("blur", (e) => {
 });
 
 
-joinBtn.addEventListener("click", () => {
+joinBtn.addEventListener("click", (e) => {
 	const pw = pwBox.value;
 	const pw_ch = pw_chBox.value;
+	const email = emailBox.value;
 	
-	if(pw != pw_ch) {
+	if(email.length <= 4) {
+		alert("아이디는 최소 4자 이상이어야합니다.");
+		e.preventDefault();
+		emailBox.focus();
+	} else if(pw != pw_ch) {
 		alert("비밀번호가 일치하지 않습니다.");
+		e.preventDefault();
+		pw_chBox.focus();
 	}
+	return true;
 });
 
 init();

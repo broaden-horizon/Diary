@@ -4,6 +4,7 @@ public class User {
 	private String userEmail;
 	private String userPW;
 	
+	
 	public String getUserEmail() {
 		return userEmail;
 	}
