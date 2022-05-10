@@ -18,16 +18,14 @@
 	오늘도 수고하셨어요. 마우스를 움직여 오늘을 기록해볼까요?
 </div>
 
-<img class="butterfly" src="/img/butterfly.png">
+
 
 <div class="branch_arrow">
 	<div><i class="bi bi-caret-down-fill"></i></div>
 	<img class="branch" src="/img/branch.png">
 </div>
 
-<div class="target_"></div>
-<div class='cover'></div>
-<script type="text/javascript" src="/script/script_index.js"></script>
+<script type="module" src="/script/script_index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>	
 </html>

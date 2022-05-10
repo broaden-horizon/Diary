@@ -14,12 +14,24 @@
 </head>
 <body>
 	<%
+		String userEmail = null;
+		if(session.getAttribute("userEmail") != null) {
+			userEmail = (String) session.getAttribute("userEmail");
+		}
+		if(userEmail != null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인 되어 있습니다.');");
+			script.println("history.back();");
+			script.println("</script>");
+		}
+		
 		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(user.getUserEmail(), user.getUserPW());
 		if (result == 1) {
+			session.setAttribute("userEmail", user.getUserEmail());
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('로그인 성공');");
 			script.println("location.href = 'main.jsp';");
 			script.println("</script>");
 		} else if (result == 0) {

@@ -14,8 +14,17 @@
 </head>
 <body>
 	<%
- 		System.out.println(user.getUserEmail() + user.getUserPW());
-		if(user.getUserEmail() == null || user.getUserPW() == null) {
+		String userEmail = null;
+		if(session.getAttribute("userEmail") != null) {
+			userEmail = (String) session.getAttribute("userEmail");
+		}
+		if(userEmail != null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인 되어 있습니다.');");
+			script.println("history.back();");
+			script.println("</script>");
+		} else if (user.getUserEmail() == null || user.getUserPW() == null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('모든 항목에 입력해주세요.');");
@@ -31,6 +40,7 @@
 				script.println("history.back();");
 				script.println("</script>");	
 			} else {
+				session.setAttribute("userEmail", user.getUserEmail());
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("location.href='main.jsp';");

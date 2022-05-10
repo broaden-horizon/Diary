@@ -1,5 +1,5 @@
+import {fadeInOut, Nabi} from './flyingNabi.js'
 //dom
-const cover = document.querySelector(".cover");
 const joinPageBtn = document.querySelector(".joinPageBtn");
 const arrow = document.querySelector(".arrow");
 const join = document.querySelector(".join");
@@ -9,23 +9,15 @@ const emailBox = document.querySelector(".email");
 const pwBox = document.querySelector(".pw");
 const pw_chBox = document.querySelector(".pw_ch");
 const joinBtn = document.querySelector(".joinBtn");
+const backBtn = document.querySelector(".backBtn");
 
+//variables
 let isFold = true;
 
 //functions 
-function init() {
-
-	//페이지로딩하며화면 전환
-	cover.style.opacity = 0;
-	setTimeout(() => {
-		cover.style.display = 'none';
-	}, 2500);
-
-}
-
 function unfoldJoin() {
 	//조인 화면 키우기 
-	joinPageBtn.style.width = 500 + 'px';
+	joinPageBtn.style.width = '43vw';
 	arrow.style.transform = "rotate( 180deg )";	
 	arrow.style.left = 0;
 	arrow.style.marginLeft= "10px";
@@ -34,8 +26,9 @@ function unfoldJoin() {
 
 	setTimeout(() => {
 		//요소들 에니메이션 
-	join.style.width = '350px';
-	join.style.opacity = 1;		
+	join.style.width = '38vw';
+	join.style.opacity = 1;	
+	join.style.right = 0;	
 	}, 0);	
 	
 	isFold = false;
@@ -58,11 +51,8 @@ function foldJoin() {
 		//joinBox 사라
 	joinBox.classList.toggle("d-none");		
 	}, 500);
-	
 	isFold = true;
 }
-
-
 
 
 
@@ -105,6 +95,13 @@ joinBtn.addEventListener("click", (e) => {
 	return true;
 });
 
-init();
+backBtn.addEventListener("click", () => {
+	foldJoin();
+})
 
+fadeInOut("in");
+/*document.addEventListener("DOMContentLoaded", () => {
+	new Nabi();
+})
+*/
 
