@@ -19,10 +19,10 @@ body {
 	transform: translate(-50%, 0);
 	width: 16rem;
 	font-size: 1.2rem;
-	animation: typing 1.5s steps(16), blink .5s step-end infinite alternate;
+	animation: typing 1.5s steps(16);
 	white-space: nowrap;
 	overflow: hidden;
-	border-right: 3px solid;
+/* 	border-right: 3px solid; */
 }
 
 @keyframes typing{
@@ -50,21 +50,20 @@ canvas {
 	margin: 0;
 	padding: 0;
 }
+
 /*---------------------기록 파트 ------------------------*/
 .dateBox {
 	margin: 0;
 }
 .record_box {
-	width: 42vw;
-	height: 55vh;
-	min-width: 280px;
-	min-height: 320px;
+	width: 50vw;
+	height: 65vh;
+	min-width: 330px;
+	min-height: 400px;
 	position: static;
 	display: block;
 	padding: 2rem !important;
-	opacity: 0;
-	transition: all 500ms cubic-bezier(0.250, 0.100, 0.250, 1.000); /* ease (default) */
-	z-index: 0;
+	opacity: 1;
 }
 
 
@@ -87,44 +86,23 @@ canvas {
 }
 
 .writingBox {
-	height: 30%;
+	height: 20vh;
 	resize: none;
 }
 
-.writingBox > div > div {
-	height: 100%;
-	width: 100%;
-	padding: 10px;
-	border-radius: 8px;
-}
-.deleteBox {
+.submitBox {
 	display: flex;
-	flex-flow: row nowrap;
 	justify-content: flex-end;
 }
 
-.leftBtn, .rightBtn {
-	margin: 30px;
-	z-index: 3000;
-}
 
-.leftBtn:hover, .rightBtn:hover {
-	cursor: pointer;
-}
-
-/*--------------------네비 파트 ------------------------*/
-.goback {
-	position: fixed;
-	top: 15px;
-	left: 15px;
-}
 .logout {
 	position: fixed;
 	top: 15px;
 	right: 15px;
 }
-
-.logout > a, .goback > a {
+/*--------------------로그 아웃 파트 ------------------------*/
+.logout > a {
 	color: black;
 	text-decoration: none; box-shadow: 0 -6px rgba(55, 108, 66, 0.38) inset;
 }

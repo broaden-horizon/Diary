@@ -12,9 +12,9 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = null;
-		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
-		String dbID = "root";
-		String dbPW = "12345678";
+		String dbURL = "jdbc:mysql://localhost/rlghd1698";
+		String dbID = "rlghd1698";
+		String dbPW = "eight00!@";
 		String SQL = "SELECT userPW FROM USER WHERE userEmail = ?";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -62,12 +62,11 @@ public class UserDAO {
 	
 	public int join(User user) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		Connection conn = null;
 		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
 		String dbID = "root";
 		String dbPW = "12345678";
-		String SQL = "INSERT INTO USER VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO USER VALUES (?, ?, ?, ?)";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
@@ -75,19 +74,12 @@ public class UserDAO {
 			pstmt.setString(1, user.getUserEmail());
 			pstmt.setString(2, user.getUserPW());
 			pstmt.setInt(3, 0);
+			pstmt.setInt(4, 0);
 			System.out.println(pstmt);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
@@ -108,14 +100,14 @@ public class UserDAO {
 	}
 	
 	
-	public int getNumOfWriting(String userEmail) {
+	public int getPoints(String userEmail) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = null;
 		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
 		String dbID = "root";
 		String dbPW = "12345678";
-		String SQL = "SELECT numOfWriting FROM USER WHERE userEmail = ?";
+		String SQL = "SELECT points FROM USER WHERE userEmail = ?";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
@@ -156,8 +148,81 @@ public class UserDAO {
 		return -2; // 데이터베이스 오류
 		
 	}
-	public int addNumOfWriting(String userEmail) {
-		String SQL = "UPDATE USER SET numOfWriting = ? WHERE userEmail = ?";
+	public int addPoints(String userEmail) {
+		String SQL = "UPDATE USER SET points = ? WHERE userEmail = ?";
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
+		String dbID = "root";
+		String dbPW = "12345678";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getPoints(userEmail) + 1);
+			pstmt.setString(2, userEmail);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();// TODO: handle exception
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return -1;
+	}
+
+	
+	
+	public int addTree(String userEmail) {
+		String SQL = "UPDATE USER SET numOfTrees = ? WHERE userEmail = ?";
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
+		String dbID = "root";
+		String dbPW = "12345678";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNumOfTrees(userEmail) + 1);
+			pstmt.setString(2, userEmail);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();// TODO: handle exception
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	public int getNumOfTrees(String userEmail) {
+		String SQL = "SELECT numOfTrees FROM USER WHERE userEmail = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = null;
@@ -168,9 +233,11 @@ public class UserDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNumOfWriting(userEmail) + 1);
-			pstmt.setString(2, userEmail);
-			return pstmt.executeUpdate();
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();// TODO: handle exception
 		} finally {
@@ -198,6 +265,41 @@ public class UserDAO {
 		}
 		return -1;
 	}
-
+	
+	public int reducePoints(int points, String userEmail) {
+		String SQL = "UPDATE USER SET points = ? WHERE userEmail = ?";
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
+		String dbID = "root";
+		String dbPW = "12345678";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getPoints(userEmail) - points);
+			pstmt.setString(2, userEmail);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();// TODO: handle exception
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return -1;
+	}
 }
 

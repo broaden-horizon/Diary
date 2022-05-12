@@ -3,13 +3,11 @@ export class Nabi {
 	constructor(moveDelay) {
 		//나비 꾸미
 		this.butterfly = document.createElement("img");
+		this.butterfly.classList.add("nabi");
 		this.butterfly.src = "/img/butterfly.png";
-		this.butterfly.style = "left: 50px";
-		this.butterfly.style = "top: 50px";
 		this.butterfly.style.height = '100px';
 		this.butterfly.style.width = '100px';
 		this.butterfly.style.transform = "scaleX(-1)";
-		this.butterfly.style.position = "fixed";
 		this.butterfly.style.animation = "moveUpDown 3s infinite";
 		this.butterfly.style.margin = '0';
 		this.butterfly.style.padding = '0';
@@ -17,7 +15,7 @@ export class Nabi {
 		
 		
 		this.moveStyle = document.createElement("style");
-		this.moveStyle.innerText = "@keyframes moveUpDown {0% {margin-top: -5px;	} 50% {margin-top: 5px;} 100% {margin-top: -5px}}";
+		this.moveStyle.innerText = "@keyframes moveUpDown {0% {margin-top: -5px;	} 50% {margin-top: 5px;} 100% {margin-top: -5px}} .nabi {position: fixed; left: 150px; top: 50px;}";
 		document.head.appendChild(this.moveStyle);
 		
 		
@@ -38,6 +36,7 @@ export class Nabi {
 			this.mouse_x = e.pageX;
 			this.mouse_y = e.pageY;
 		})
+		
 		//움직임 시작
 		setTimeout(() => {
 			this.move_interval = setInterval(this.move.bind(this), 50);
@@ -54,9 +53,9 @@ export class Nabi {
 		
 		this.butterfly.style.left = (this.img_x + ((this.mouse_x - this.img_x)/25)) + 'px';
 		this.butterfly.style.top = (this.img_y + ((this.mouse_y - this.img_y)/25)) + 'px';
-		
-		
-		this.checkDestination();
+		if(this.destFunc != null) {
+			this.checkDestination();
+		}
 		
 	}
 	//목표지정
@@ -105,21 +104,14 @@ export class Nabi {
 	}
 }
 export function fadeInOut(inOut) {
-	//커버 객체 생성 및 css 지정
-	const cover = document.createElement('div');
-	cover.style.opacity = inOut == 'in' ? 1 : 0;
-	cover.style.width = "100%";
-	cover.style.height = "100%";
-	cover.style.backgroundColor = "black";
-	cover.style.position = "fixed";
-	cover.style.display = "block";
-	cover.style.left = 0;
-	cover.style.top = 0;
-	cover.style.transition = "opacity 3s";
-	document.body.appendChild(cover);
-	setTimeout(() => {cover.style.opacity = inOut == 'in' ? 0 : 1}, 10);
-	if(inOut == 'in') {setTimeout(() => {cover.remove()}, 3000)}
-	
+	const cover = document.querySelector('.cover');
+	if(inOut == 'in') {
+		cover.style.opacity = 0;
+		setTimeout(() => {cover.classList.toggle('d-none')}, 1900);
+	} else {
+		cover.classList.toggle('d-none');
+		setTimeout(() => {cover.style.opacity = 1}, 0);
+	}
 }
 
 

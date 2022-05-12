@@ -1,6 +1,5 @@
-//import {fadeInOut, Nabi} from './flyingNabi.js'
-//fadeInOut("in");
-//new Nabi();
+import {fadeInOut, Nabi} from './flyingNabi.js'
+
 
 $.datepicker.setDefaults({
   dateFormat: 'yy-mm-dd',
@@ -30,14 +29,14 @@ function goingUpDown(target) {
 		target.classList.toggle("top-100");
 		setTimeout(() => {
 			target.classList.toggle("d-none");
-		}, 500)
+		}, 500);
 	} else {
 		target.classList.toggle("d-none");
 		setTimeout(() => {
 			target.style.opacity = '1';
 			target.classList.toggle("top-50");
 			target.classList.toggle("top-100");
-		},5)
+		},30);
 	}
 }
 
@@ -75,3 +74,7 @@ yearBackBtn.addEventListener("click", () => {
 		goingUpDown(buttonBox);
 	}, 500);
 }, false)
+
+fadeInOut("in");
+new Nabi(0);
+

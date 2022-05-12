@@ -13,9 +13,9 @@ public class WritingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = null;
-		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
-		String dbID = "root";
-		String dbPW = "12345678";
+		String dbURL = "jdbc:mysql://localhost/rlghd1698";
+		String dbID = "rlghd1698";
+		String dbPW = "eight00!@";
 		String SQL = "SELECT NOW()";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -107,7 +107,7 @@ public class WritingDAO {
 		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
 		String dbID = "root";
 		String dbPW = "12345678";
-		String SQL = "INSERT INTO WRITING VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO WRITING VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
@@ -118,6 +118,7 @@ public class WritingDAO {
 			pstmt.setString(4, date);
 			pstmt.setInt(5, Integer.parseInt(emotionScore));
 			pstmt.setString(6,  writing);
+			pstmt.setInt(7, 1);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -238,6 +239,94 @@ public class WritingDAO {
 				writing.setWriting(rs.getString(6));
 				writing.setIsAvailable(rs.getInt(7));
 				list.add(writing);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	
+	public int delete(String userEmail, String date) {
+		System.out.println("deleting... ");
+		System.out.println("email: " + userEmail);
+		System.out.println("date: " + date);
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
+		String dbID = "root";
+		String dbPW = "12345678";
+		String SQL = "UPDATE WRITING SET isAvailable = 0 WHERE userEmail = ? AND date = ?";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userEmail);
+			pstmt.setString(2, date);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return -1; //database error
+	}
+	
+	public ArrayList<String> getAllDates(String userEmail) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = null;
+		String dbURL = "jdbc:mysql://localhost:3306/FLYING";
+		String dbID = "root";
+		String dbPW = "12345678";
+		String SQL = "SELECT date FROM WRITING WHERE userEmail = ? ORDER BY date";
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

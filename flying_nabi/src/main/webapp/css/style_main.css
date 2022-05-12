@@ -11,18 +11,24 @@
 body {
 	overflow: hidden;
 }
+/*---------------------- 점수 파트 ------------------------*/
+.score {
+	z-index: 200;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
 /*----------------------- 그리팅 파트 ------------------------*/
 .greeting {
 	position: absolute;
 	left: 50%;
-	top: 10%;
+	top: 20%;
 	transform: translate(-50%, 0);
 	width: 16rem;
 	font-size: 1.2rem;
-	animation: typing 1.5s steps(16), blink .5s step-end infinite alternate;
+	animation: typing 1.5s steps(16);
 	white-space: nowrap;
 	overflow: hidden;
-	border-right: 3px solid;
 }
 
 @keyframes typing{
@@ -111,6 +117,11 @@ canvas {
 /* 	border-radius: 20px !important; */
 	height: 100%;
 	width: 100%;
+}
+.search_box > .container > .row > .col-3 > button,
+.search_box > .container > .row > .col-3 > a > button {
+	padding: 0.3rem !important;
+	min-width: 3.5rem;
 }
 
 .backToYear {

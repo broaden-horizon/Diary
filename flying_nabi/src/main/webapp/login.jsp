@@ -29,7 +29,7 @@
 		
 %>
 <body class="body">
-
+<div class='cover' style = 'background-color: black; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index:3000; margin: 0; transition: opacity 2s;' ></div>
 <!-- 로그인 화면 -->
 <div class="loginbox position-absolute top-50 start-50 translate-middle shadow p-3 mb-5 bg-body rounded">
 	<div class="login">
@@ -43,7 +43,7 @@
 			  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPW">
 			  <label for="floatingPassword">패스워드</label>
 			</div>
-			<input class="submit btn btn-outline-secondary" type="submit" value="로그인">
+			<input class="loginBtn submit btn btn-outline-secondary" type="submit" value="로그인">
 		</form>
 	</div>
 	<button class="joinPageBtn btn btn-light"><i class="arrow bi bi-chevron-bar-left gray"></i></button>

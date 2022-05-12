@@ -4,12 +4,12 @@ const joinPageBtn = document.querySelector(".joinPageBtn");
 const arrow = document.querySelector(".arrow");
 const join = document.querySelector(".join");
 const joinBox = document.querySelector(".joinbox");
-const joinTitle = document.querySelector(".joinTitle");
 const emailBox = document.querySelector(".email");
 const pwBox = document.querySelector(".pw");
 const pw_chBox = document.querySelector(".pw_ch");
 const joinBtn = document.querySelector(".joinBtn");
 const backBtn = document.querySelector(".backBtn");
+const loginBtn = document.querySelector(".loginBtn");
 
 //variables
 let isFold = true;
@@ -99,9 +99,7 @@ backBtn.addEventListener("click", () => {
 	foldJoin();
 })
 
-fadeInOut("in");
-/*document.addEventListener("DOMContentLoaded", () => {
-	new Nabi();
-})
-*/
+fadeInOut("in");	
+new Nabi(10);
+
 

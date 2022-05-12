@@ -3,8 +3,6 @@
 <%@ page import="writing.WritingDAO" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Arrays" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="writing" class="writing.Writing" scope="page" />
 <jsp:setProperty property="date" name="writing"/>
@@ -36,49 +34,21 @@
 			script.println("</script>");
 		} else {
 			WritingDAO writingDAO = new WritingDAO();
-			
-			ArrayList<String> allDates = new ArrayList<String>();
-	   		allDates = writingDAO.getAllDates(userEmail);
-			if(Arrays.asList(allDates).contains(writing.getDate())){
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('데이터베이스 오류입니다.');");
-				script.println("history.back();");
-				script.println("</script>");
-			}
-			
+			int resultDelet = writingDAO.delete(userEmail, writing.getDate());
 			int result = writingDAO.write(userEmail, writing.getDate(), writing.getEmotionScore(), writing.getWriting());
-			if (result == -1) {
+			if (result + resultDelet <= -1) {
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('데이터베이스 오류입니다.');");
 				script.println("history.back();");
 				script.println("</script>");
-			} else {
-				UserDAO userDAO = new UserDAO();
-				int resultOfAdd = userDAO.addPoints(userEmail);
-				if(resultOfAdd == -1) {
-					PrintWriter script = response.getWriter();
-					script.println("<script>");
-					script.println("alert('데이터베이스 오류입니다.');");
-					script.println("history.back();");
-					script.println("</script>");
-				} else {
-					if(userDAO.getPoints(userEmail) % 3 == 0) {
-						PrintWriter script = response.getWriter();
-						script.println("<script>");
-						script.println("alert('1 포인트를 얻어 나무가 성장합니다! \\n 나의 포인트:" + userDAO.getPoints(userEmail) + "');");
-						script.println("location.href='./main.jsp'");
-						script.println("</script>");
-					} else {
-						PrintWriter script = response.getWriter();
-						script.println("<script>");
-						script.println("alert('1 포인트를 얻었습니다! \\n 나의 포인트:" + userDAO.getPoints(userEmail) + "');");
-						script.println("location.href='./main.jsp'");
-						script.println("</script>");
-					}
-				}
+			} else { 
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("location.href='writing.jsp?year=" + writing.getDate().substring(0,4) + "&month=" + writing.getDate().substring(5, 7) + "'");
+				script.println("</script>");
 			}
+			
 		}
 		
 	%>
