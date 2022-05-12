@@ -15,7 +15,7 @@ public class WritingDAO {
 		Connection conn = null;
 		String dbURL = "jdbc:mysql://localhost/rlghd1698";
 		String dbID = "rlghd1698";
-		String dbPW = "eight00!@";
+		String dbPW = " ";
 		String SQL = "SELECT NOW()";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
